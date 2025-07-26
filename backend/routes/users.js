@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
       SELECT user_id, username, email, role, status
       FROM users
       WHERE status = 'active'
-      ORDER BY username ASC
+      ORDER BY user_id ASC
     `);
     res.json(rows);
   } catch (err) {
@@ -23,7 +23,7 @@ router.get("/inactive", async (req, res) => {
       SELECT user_id, username, email, role, status
       FROM users
       WHERE status = 'inactive'
-      ORDER BY username ASC
+      ORDER BY user_id ASC
     `);
     res.json(rows);
   } catch (err) {
@@ -81,7 +81,7 @@ router.post("/register", async (req, res) => {
 
     // Simpan user baru
     await db.query(
-      `INSERT INTO users (username, email, password, role, status) VALUES (?, ?, ?, ?, 'active')`,
+      `INSERT INTO users (username, email, password, role, status) VALUES (?, ?, ?, ?, 'inactive')`,
       [username, email, hashedPassword, role]
     );
 

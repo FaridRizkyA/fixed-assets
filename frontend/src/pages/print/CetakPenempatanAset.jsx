@@ -34,7 +34,7 @@ function CetakPenempatanAset() {
             <th>#</th>
             <th>Nama Aset</th>
             <th>Kode Aset</th>
-            <th>Ditugaskan Kepada</th>
+            <th>Penanggung Jawab</th>
             <th>Departemen</th>
             <th>Tanggal Penempatan</th>
             <th>Tanggal Pengembalian</th>

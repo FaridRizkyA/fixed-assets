@@ -14,12 +14,12 @@ function CetakRiwayatPenyusutan() {
   });
 
 
-  const hasPrinted = useRef(false); // ← hanya akan print sekali
+  const hasPrinted = useRef(false); 
 
   useEffect(() => {
     if (!data || data.length === 0 || hasPrinted.current) return;
 
-    hasPrinted.current = true; // set sudah mencetak
+    hasPrinted.current = true;
 
     setTimeout(() => {
       window.print();

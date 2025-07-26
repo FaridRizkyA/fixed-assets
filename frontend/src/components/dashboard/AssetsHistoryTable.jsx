@@ -10,7 +10,6 @@ function formatRupiah(number) {
   }).format(number);
 }
 
-// Fungsi helper format status
 function formatStatus(status) {
   switch (status) {
     case "available":

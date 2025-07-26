@@ -4,8 +4,8 @@ import AssetForm from "../components/forms/AssetForm";
 import AssetsTable from "../components/tables/AssetsTable";
 
 function PengadaanAset() {
-  const [refreshTable, setRefreshTable] = useState(false);
   const role = JSON.parse(localStorage.getItem("user"))?.role;
+  const [refreshTable, setRefreshTable] = useState(false);
 
   const handleAssetAdded = () => {
     setRefreshTable(prev => !prev);

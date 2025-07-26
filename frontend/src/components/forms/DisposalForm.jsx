@@ -13,16 +13,17 @@ function DisposalForm({ onDisposalSubmitted }) {
   });
 
   useEffect(() => {
-    async function fetchAvailableAssets() {
-      try {
-        const res = await axios.get("http://localhost:5000/api/assets");
-        setAssets(res.data.filter(item => item.status !== "disposal"));
-      } catch (err) {
-        console.error("Gagal mengambil aset:", err);
-      }
-    }
     fetchAvailableAssets();
   }, []);
+
+  const fetchAvailableAssets = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/assets");
+      setAssets(res.data.filter(item => item.status !== "disposal"));
+    } catch (err) {
+      console.error("Gagal mengambil aset:", err);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -3,12 +3,15 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import { Form, Button, Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import EditAssetModal from "../modals/EditAssetModal";
 
 function AssetsTable({ refreshTrigger }) {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [year, setYear] = useState("");
   const [yearOptions, setYearOptions] = useState([]);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +19,6 @@ function AssetsTable({ refreshTrigger }) {
     fetchOldestYear();
   }, []);
 
-  // ⬅️ ini penting untuk auto-refresh saat refreshTrigger berubah
   useEffect(() => {
     fetchData();
   }, [refreshTrigger]);
@@ -119,7 +121,10 @@ function AssetsTable({ refreshTrigger }) {
         <Button
           variant="warning"
           size="sm"
-          onClick={() => alert(`Test Edit Aset ID: ${row.asset_id}`)}
+          onClick={() => {
+            setSelectedAsset(row);
+            setShowEditModal(true);
+          }}
         >
           Edit
         </Button>
@@ -184,6 +189,14 @@ function AssetsTable({ refreshTrigger }) {
         noHeader
         customStyles={customStyles}
       />
+
+      <EditAssetModal
+        show={showEditModal}
+        onHide={() => setShowEditModal(false)}
+        asset={selectedAsset}
+        onUpdated={fetchData}
+      />
+
     </>
   );
 }

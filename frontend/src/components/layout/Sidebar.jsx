@@ -1,4 +1,3 @@
-// frontend/components/layout/Sidebar.jsx
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
@@ -12,6 +11,8 @@ import {
 } from "react-icons/fa";
 
 const Sidebar = ({ isOpen }) => {
+  const user = JSON.parse(localStorage.getItem("user")); // Ambil dari localStorage
+
   return (
     <div
       style={{
@@ -26,7 +27,7 @@ const Sidebar = ({ isOpen }) => {
         transform: isOpen ? "translateX(0)" : "translateX(-100%)",
         transition: "transform 0.3s ease-in-out",
         overflowX: "hidden",
-        padding: isOpen ? "1rem" : "0"
+        padding: isOpen ? "1rem" : "0",
       }}
     >
       {isOpen && (
@@ -46,18 +47,26 @@ const Sidebar = ({ isOpen }) => {
             <Nav.Link as={Link} to="/penempatan" className="text-white">
               <FaExchangeAlt className="me-2" /> Penempatan Aset
             </Nav.Link>
-            <Nav.Link as={Link} to="/penyusutan" className="text-white">
-              <FaCalculator className="me-2" /> Penyusutan Aset
-            </Nav.Link>
+            {user?.role !== "staff" && (
+              <Nav.Link as={Link} to="/penyusutan" className="text-white">
+                <FaCalculator className="me-2" />
+                Penyusutan Aset
+              </Nav.Link>
+            )}
+            {user?.role !== "staff" && (
             <Nav.Link as={Link} to="/penghapusan" className="text-white">
               <FaTrashAlt className="me-2" /> Penghapusan Aset
             </Nav.Link>
+            )}
             <Nav.Link as={Link} to="/dokumen" className="text-white">
               <FaFileAlt className="me-2" /> Dokumen Aset
             </Nav.Link>
-            <Nav.Link as={Link} to="/user" className="text-white">
-              <FaUserCog className="me-2" /> Manajemen User
-            </Nav.Link>
+
+            {user?.role === "admin" && (
+              <Nav.Link as={Link} to="/user" className="text-white">
+                <FaUserCog className="me-2" /> Manajemen User
+              </Nav.Link>
+            )}
           </Nav>
         </>
       )}

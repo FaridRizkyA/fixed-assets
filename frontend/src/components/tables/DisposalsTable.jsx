@@ -3,10 +3,13 @@ import DataTable from "react-data-table-component";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import EditDisposalModal from "../modals/EditDisposalModal";
 
 function DisposalsTable({ refreshTrigger }) {
   const [disposals, setDisposals] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedDisposal, setSelectedDisposal] = useState(null);
   const navigate = useNavigate();
 
   const role = JSON.parse(localStorage.getItem("user"))?.role;
@@ -46,6 +49,11 @@ function DisposalsTable({ refreshTrigger }) {
       item.asset_code.toLowerCase().includes(searchText.toLowerCase())
   );
 
+  const handleEdit = (row) => {
+    setSelectedDisposal(row);
+    setShowEditModal(true);
+  };
+
   const handlePrint = () => {
     if (filteredData.length === 0) {
       alert("Tidak ada data untuk dicetak.");
@@ -83,14 +91,26 @@ function DisposalsTable({ refreshTrigger }) {
   if (role === "admin" || role === "asset_manager") {
     columns.push({
       name: "Aksi",
+      width: "160px",
       cell: (row) => (
-        <Button
-          size="sm"
-          variant="success"
-          onClick={() => handleRestore(row.disposal_id)}
-        >
-          Pulihkan
-        </Button>
+        <div className="d-flex gap-1 flex-wrap">
+          <Button
+            size="sm"
+            variant="warning"
+            style={{ minWidth: "70px" }}
+            onClick={() => handleEdit(row)}
+          >
+            Edit
+          </Button>
+          <Button
+            size="sm"
+            variant="success"
+            style={{ minWidth: "70px" }}
+            onClick={() => handleRestore(row.disposal_id)}
+          >
+            Pulihkan
+          </Button>
+        </div>
       ),
       ignoreRowClick: true,
       allowOverflow: true,
@@ -121,13 +141,15 @@ function DisposalsTable({ refreshTrigger }) {
           onChange={(e) => setSearchText(e.target.value)}
           style={{ maxWidth: "250px" }}
         />
-        <Button
-          variant="success"
-          onClick={handlePrint}
-          style={{ height: "36px", padding: "4px 16px" }}
-        >
-          Cetak Laporan
-        </Button>
+        {role !== "staff" && (
+          <Button
+            variant="success"
+            onClick={handlePrint}
+            style={{ height: "36px", padding: "4px 16px" }}
+          >
+            Cetak Laporan
+          </Button>
+        )}
         </div>
       </div>
 
@@ -140,6 +162,14 @@ function DisposalsTable({ refreshTrigger }) {
         noHeader
         customStyles={customStyles}
       />
+
+      <EditDisposalModal
+        show={showEditModal}
+        onHide={() => setShowEditModal(false)}
+        data={selectedDisposal}
+        onUpdated={fetchDisposals}
+      />
+
     </>
   );
 }

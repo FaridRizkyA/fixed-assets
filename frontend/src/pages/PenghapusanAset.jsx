@@ -4,8 +4,12 @@ import DisposalForm from "../components/forms/DisposalForm";
 import DisposalsTable from "../components/tables/DisposalsTable";
 
 function PenghapusanAset() {
-  const [refreshTable, setRefreshTable] = useState(false);
   const role = JSON.parse(localStorage.getItem("user"))?.role;
+    if (role !== "admin" || role !== "asset_manager") {
+      return <div className="text-danger">Anda tidak memiliki akses ke halaman ini.</div>;
+    }
+
+  const [refreshTable, setRefreshTable] = useState(false);
 
   const handleDisposalAdded = () => {
     setRefreshTable((prev) => !prev);

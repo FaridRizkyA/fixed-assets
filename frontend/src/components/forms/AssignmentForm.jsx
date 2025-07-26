@@ -99,14 +99,14 @@ function AssignmentForm({ onAssigned }) {
 
         <Col md={4}>
           <Form.Group>
-            <Form.Label>Pengguna</Form.Label>
+            <Form.Label>Penanggung Jawab</Form.Label>
             <Form.Select
               name="assigned_to"
               value={form.assigned_to}
               onChange={handleChange}
               required
             >
-              <option value="" disabled>Pilih Pengguna</option>
+              <option value="" disabled>Pilih Penanggung Jawab</option>
               {users.map((user) => (
                 <option key={user.user_id} value={user.user_id}>
                   {user.username}

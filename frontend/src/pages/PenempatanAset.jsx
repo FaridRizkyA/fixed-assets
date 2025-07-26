@@ -8,7 +8,7 @@ function PenempatanAset() {
   const role = JSON.parse(localStorage.getItem("user"))?.role;
 
   const handleAssigned = () => {
-    setRefreshTable((prev) => !prev); // toggle agar memicu useEffect
+    setRefreshTable((prev) => !prev);
   };
 
   return (
@@ -24,7 +24,7 @@ function PenempatanAset() {
 
       <Card className="shadow-sm">
         <Card.Body>
-          <AssignmentsTable refresh={refreshTable} />
+          <AssignmentsTable refreshTrigger={refreshTable} />
         </Card.Body>
       </Card>
     </>

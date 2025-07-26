@@ -1,7 +1,17 @@
 import React from "react";
-import { Modal, Table, Button } from "react-bootstrap";
+import { Modal, Table, Button, Badge } from "react-bootstrap";
 
 function ActivateUserModal({ show, onClose, inactiveUsers, onRestore }) {
+  const renderStatusBadge = (status) => {
+    switch (status) {
+      case "inactive":
+        return <Badge bg="danger">Nonaktif</Badge>;
+      case "active":
+        return <Badge bg="success">Aktif</Badge>;
+      default:
+        return <Badge bg="secondary">{status}</Badge>;
+    }
+  };
   return (
     <Modal show={show} onHide={onClose} size="lg" centered>
       <Modal.Header closeButton>
@@ -14,6 +24,7 @@ function ActivateUserModal({ show, onClose, inactiveUsers, onRestore }) {
               <th>Username</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Status</th>
               <th>Pulihkan</th>
             </tr>
           </thead>
@@ -23,6 +34,7 @@ function ActivateUserModal({ show, onClose, inactiveUsers, onRestore }) {
                 <td>{u.username}</td>
                 <td>{u.email}</td>
                 <td>{u.role}</td>
+                <td>{renderStatusBadge(u.status)}</td>
                 <td>
                   <Button
                     variant="success"

@@ -6,6 +6,11 @@ import DepreciationsHistoryTable from "../components/tables/DepreciationsHistory
 function PenyusutanAset() {
   const [refreshTable, setRefreshTable] = useState(false);
 
+  const role = JSON.parse(localStorage.getItem("user"))?.role;
+  if (role === "staff") {
+    return <div className="text-danger">Anda tidak memiliki akses ke halaman ini.</div>;
+  }
+
   const handleRefresh = () => {
     setRefreshTable(prev => !prev);
   };

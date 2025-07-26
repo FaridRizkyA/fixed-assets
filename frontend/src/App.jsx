@@ -14,6 +14,7 @@ import CetakRingkasanPenyusutan from "./pages/print/CetakRingkasanPenyusutan";
 import CetakDaftarAset from './pages/print/CetakDaftarAset';
 import CetakPenempatanAset from './pages/print/CetakPenempatanAset';
 import CetakPenghapusanAset from './pages/print/CetakPenghapusanAset';
+import AdminRoute from './components/AdminRoute';
 
 function App() {
   return (
@@ -84,7 +85,9 @@ function App() {
           path="/user"
           element={
             <PrivateRoute>
-              <ManajemenUser />
+              <AdminRoute>
+                <ManajemenUser />
+              </AdminRoute>
             </PrivateRoute>
           }
         />

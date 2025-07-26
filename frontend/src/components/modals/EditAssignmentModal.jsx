@@ -7,7 +7,6 @@ function EditAssignmentModal({ show, onHide, assignment, onUpdated }) {
   const [users, setUsers] = useState([]);
   const [assets, setAssets] = useState([]);
 
-  // Set form default dari assignment yang dikirim
   useEffect(() => {
     if (assignment) {
       setForm({
@@ -35,7 +34,6 @@ function EditAssignmentModal({ show, onHide, assignment, onUpdated }) {
           a.status === "available" || a.asset_id === assignment?.asset_id
         );
 
-        // Optional: sort berdasarkan kode aset
         filtered.sort((a, b) => a.asset_code.localeCompare(b.asset_code));
 
         setAssets(filtered);

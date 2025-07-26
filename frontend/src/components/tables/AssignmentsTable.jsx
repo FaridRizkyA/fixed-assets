@@ -12,6 +12,9 @@ function AssignmentsTable({ refreshTrigger }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const navigate = useNavigate();
 
+  const role = JSON.parse(localStorage.getItem("user"))?.role;
+  const canEdit = role === "admin" || role === "asset_manager";
+
   useEffect(() => {
     fetchAssignments();
   }, [refreshTrigger]);
@@ -94,7 +97,7 @@ function AssignmentsTable({ refreshTrigger }) {
     { name: "#", selector: (row, i) => i + 1, width: "60px" },
     { name: "Kode Aset", selector: (row) => row.asset_code, sortable: true },
     { name: "Nama Aset", selector: (row) => row.asset_name },
-    { name: "Pengguna", selector: (row) => row.assigned_user },
+    { name: "Penanggung Jawab", selector: (row) => row.assigned_user },
     { name: "Departemen", selector: (row) => row.department || "-" },
     {
       name: "Tanggal Penempatan",
@@ -105,18 +108,22 @@ function AssignmentsTable({ refreshTrigger }) {
       cell: (row) =>
         row.return_date ? (
           formatDate(row.return_date)
-        ) : (
+        ) : canEdit ? (
           <Button
             size="sm"
             variant="success"
+            style={{ minWidth: "90px" }}
             onClick={() => handleReturn(row.assignment_id)}
           >
             Returned
           </Button>
+        ) : (
+          "-"
         ),
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
+      width: "140px",
     },
     {
       name: "Status",
@@ -126,23 +133,37 @@ function AssignmentsTable({ refreshTrigger }) {
         </Badge>
       ),
     },
-    {
+  ];
+
+  if (canEdit) {
+    columns.push({
       name: "Aksi",
+      width: "160px",
       cell: (row) => (
-        <>
-          <Button size="sm" variant="warning" onClick={() => handleEdit(row)}>
+        <div className="d-flex gap-1 flex-wrap">
+          <Button
+            size="sm"
+            variant="warning"
+            style={{ minWidth: "70px" }}
+            onClick={() => handleEdit(row)}
+          >
             Edit
           </Button>
-          <Button size="sm" variant="danger" onClick={() => handleDelete(row.assignment_id)}>
+          <Button
+            size="sm"
+            variant="danger"
+            style={{ minWidth: "70px" }}
+            onClick={() => handleDelete(row.assignment_id)}
+          >
             Hapus
           </Button>
-        </>
+        </div>
       ),
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
-    },
-  ];
+    });
+  }
 
   const customStyles = {
     headCells: {
@@ -160,16 +181,16 @@ function AssignmentsTable({ refreshTrigger }) {
         <h5 className="mb-0">Riwayat Penempatan Aset</h5>
         <div className="d-flex gap-2 align-items-center">
           <Form.Control
-          type="text"
-          placeholder="Cari penempatan..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          style={{ maxWidth: "250px" }}
+            type="text"
+            placeholder="Cari penempatan..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            style={{ maxWidth: "250px" }}
           />
           <Button
-          variant="success"
-          onClick={handlePrint}
-          style={{ height: "36px", padding: "4px 16px" }}
+            variant="success"
+            onClick={handlePrint}
+            style={{ height: "36px", padding: "4px 16px" }}
           >
             Cetak Laporan
           </Button>
@@ -194,7 +215,6 @@ function AssignmentsTable({ refreshTrigger }) {
           onUpdated={handleUpdated}
         />
       )}
-
     </>
   );
 }

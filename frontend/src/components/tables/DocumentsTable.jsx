@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import axios from "axios";
+import EditDocumentModal from "../modals/EditDocumentModal";
 
 function DocumentsTable() {
   const [documents, setDocuments] = useState([]);
+  const [showEdit, setShowEdit] = useState(false);
+  const [selectedDoc, setSelectedDoc] = useState(null);
+  const role = JSON.parse(localStorage.getItem("user"))?.role;
 
   useEffect(() => {
     fetchDocuments();
@@ -43,7 +47,7 @@ function DocumentsTable() {
             <th>Jenis Dokumen</th>
             <th>Diunggah Oleh</th>
             <th>Tanggal Upload</th>
-            <th>Lihat</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -54,21 +58,42 @@ function DocumentsTable() {
               <td>{doc.username}</td>
               <td>{new Date(doc.uploaded_at).toLocaleString()}</td>
               <td>
-                <Button
-                as="a"
-                href={`http://localhost:5000${doc.file_path}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="info"
-                size="sm"
-                >
-                Lihat File
-                </Button>
+                <div className="d-flex gap-1 flex-wrap">
+                  {["admin", "asset_manager"].includes(role) && (
+                    <Button
+                      variant="warning"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedDoc(doc);
+                        setShowEdit(true);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  )}
+                  <Button
+                    variant="info"
+                    size="sm"
+                    onClick={() => handleView(doc.file_path)}
+                  >
+                    Lihat File
+                  </Button>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
+
+      {selectedDoc && (
+        <EditDocumentModal
+          show={showEdit}
+          onHide={() => setShowEdit(false)}
+          document={selectedDoc}
+          onUpdated={fetchDocuments}
+        />
+      )}
+
     </>
   );
 }

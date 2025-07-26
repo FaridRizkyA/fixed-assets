@@ -44,8 +44,8 @@ function EditAssetModal({ show, onHide, asset, onUpdated }) {
 
       if (res.status === 200) {
         alert("Aset berhasil diperbarui.");
-        onUpdated(); // ⬅️ Memicu refresh di tabel
-        onHide();    // ⬅️ Tutup modal
+        onUpdated();
+        onHide();
       } else {
         throw new Error("Status bukan 200");
       }

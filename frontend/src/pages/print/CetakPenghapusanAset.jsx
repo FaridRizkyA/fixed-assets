@@ -48,7 +48,7 @@ function CetakPenghapusanAset() {
               <td>{a.asset_name}</td>
               <td>{formatDate(a.disposal_date)}</td>
               <td>{a.disposal_type}</td>
-              <td>{a.disposal_cost ? `Rp ${Number(a.disposal_cost).toLocaleString("id-ID")}` : "-"}</td>
+              <td>{a.disposal_value ? `Rp ${Number(a.disposal_value).toLocaleString("id-ID")}` : "-"}</td>
               <td>{a.notes ? a.notes : "-"}</td>
             </tr>
           ))}

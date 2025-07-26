@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { regenerateDepreciation } = require("../utils/depreciationUtils");
 
 router.get("/summary", async (req, res) => {
   try {
@@ -53,6 +54,47 @@ router.get("/history", async (req, res) => {
   } catch (err) {
     console.error("Gagal mengambil riwayat penyusutan:", err);
     res.status(500).json({ error: "Gagal mengambil riwayat penyusutan" });
+  }
+});
+
+router.get("/check-and-update", async (req, res) => {
+  try {
+    const [assets] = await db.query(`
+      SELECT a.asset_id, a.acquisition_date, a.acquisition_cost, a.category_id
+      FROM assets a
+      WHERE a.status != 'disposal'
+    `);
+
+    const [lastEntries] = await db.query(`
+      SELECT asset_id, MAX(DATE_FORMAT(depreciation_date, '%Y-%m')) AS last_period
+      FROM asset_depreciations
+      GROUP BY asset_id
+    `);
+
+    const lastMap = Object.fromEntries(lastEntries.map(e => [e.asset_id, e.last_period]));
+
+    const now = new Date();
+    const currentPeriod = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+    let updated = 0;
+    for (const asset of assets) {
+      const last = lastMap[asset.asset_id];
+
+      if (!last || last < currentPeriod) {
+        await regenerateDepreciation(
+          asset.asset_id,
+          asset.category_id,
+          asset.acquisition_date,
+          asset.acquisition_cost
+        );
+        updated++;
+      }
+    }
+
+    res.json({ message: "Penyusutan diperiksa", updated });
+  } catch (err) {
+    console.error("Gagal update penyusutan bulanan:", err);
+    res.status(500).json({ error: "Gagal update penyusutan" });
   }
 });
 

@@ -8,7 +8,6 @@ function TopNavbar({ onToggle }) {
   const location = useLocation();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // Peta rute ke nama halaman
   const pageTitles = {
     "/dashboard": "Dashboard",
     "/pengadaan": "Pengadaan Aset",

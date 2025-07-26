@@ -5,16 +5,26 @@ const db = require("../../db");
 router.get("/", async (req, res) => {
   try {
     const [rows] = await db.query(`
-      SELECT a.asset_code, a.asset_name, c.category_name, 
-             a.acquisition_cost, 
-             IFNULL(MAX(d.book_value), a.acquisition_cost) AS book_value,
-             a.status
+      SELECT 
+          a.asset_id,
+          a.asset_code,
+          a.asset_name,
+          c.category_name,
+          a.acquisition_cost,
+          d.book_value,
+          a.status
       FROM assets a
-      LEFT JOIN asset_categories c ON a.category_id = c.category_id
-      LEFT JOIN asset_depreciations d ON a.asset_id = d.asset_id
-      GROUP BY a.asset_id
-      ORDER BY a.asset_code ASC
+      JOIN asset_categories c ON a.category_id = c.category_id
+      LEFT JOIN asset_depreciations d ON d.depreciation_id = (
+          SELECT depreciation_id
+          FROM asset_depreciations
+          WHERE asset_id = a.asset_id
+          ORDER BY depreciation_date DESC
+          LIMIT 1
+      )
+      ORDER BY a.asset_code ASC;
     `);
+
     res.json(rows);
   } catch (err) {
     console.error("Gagal mengambil riwayat aset:", err);

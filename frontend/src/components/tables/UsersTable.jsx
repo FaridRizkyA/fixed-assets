@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Table } from "react-bootstrap";
+import { Button, Modal, Table, Badge } from "react-bootstrap";
 import axios from "axios";
 import ActivateUserModal from "../modals/ActivateUserModal";
 import AddUserModal from "../modals/AddUserModal";
@@ -33,6 +33,17 @@ function UsersTable() {
       setInactiveUsers(inactiveRes.data);
     } catch (err) {
       console.error("Gagal mengambil data pengguna:", err);
+    }
+  };
+
+  const renderStatusBadge = (status) => {
+    switch (status) {
+      case "active":
+        return <Badge bg="success">Aktif</Badge>;
+      case "inactive":
+        return <Badge bg="danger">Nonaktif</Badge>;
+      default:
+        return <Badge bg="secondary">{status}</Badge>;
     }
   };
 
@@ -87,34 +98,34 @@ function UsersTable() {
         <tbody>
             {users.map((u) => (
                 <tr key={u.user_id}>
-                <td>{u.username}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
-                <td>{u.status}</td>
-                <td>
-                  <Button
-                    variant="warning"
-                    size="sm"
-                    onClick={() => handleEditClick(u)}
-                  >
-                    Edit
-                  </Button>
-                  </td>
+                  <td>{u.username}</td>
+                  <td>{u.email}</td>
+                  <td>{u.role}</td>
+                  <td>{renderStatusBadge(u.status)}</td>
                   <td>
-                  {u.role !== "admin" && u.user_id !== currentUserId ? (
                     <Button
-                      variant="danger"
+                      variant="warning"
                       size="sm"
-                      onClick={() => handleDeactivate(u.user_id)}
-                      className="me-2"
+                      onClick={() => handleEditClick(u)}
                     >
-                      Nonaktifkan
+                      Edit
                     </Button>
-                  ) : (
-                    <span className="text-muted">Tidak dapat dinonaktifkan</span>
-                    )
-                  }                  
-                </td>
+                    </td>
+                    <td>
+                    {u.role !== "admin" && u.user_id !== currentUserId ? (
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleDeactivate(u.user_id)}
+                        className="me-2"
+                      >
+                        Nonaktifkan
+                      </Button>
+                    ) : (
+                      <span className="text-muted">Tidak dapat dinonaktifkan</span>
+                      )
+                    }                  
+                  </td>
                 </tr>
             ))}
         </tbody>
