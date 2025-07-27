@@ -5,7 +5,7 @@ import DisposalsTable from "../components/tables/DisposalsTable";
 
 function PenghapusanAset() {
   const role = JSON.parse(localStorage.getItem("user"))?.role;
-    if (role !== "admin" && role !== "asset_manager") {
+    if (!["admin", "asset_manager", "auditor"].includes(role)) {
       return <div className="text-danger">Anda tidak memiliki akses ke halaman ini.</div>;
     }
 
