@@ -115,7 +115,7 @@ function AssignmentsTable({ refreshTrigger }) {
             style={{ minWidth: "90px" }}
             onClick={() => handleReturn(row.assignment_id)}
           >
-            Returned
+            Kembalikan
           </Button>
         ) : (
           "-"
