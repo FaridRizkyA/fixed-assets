@@ -102,7 +102,7 @@ function EditAssignmentModal({ show, onHide, assignment, onUpdated }) {
 
             <Col md={6}>
               <Form.Group>
-                <Form.Label>Pengguna</Form.Label>
+                <Form.Label>Penanggung Jawab</Form.Label>
                 <Form.Select name="assigned_to" value={form.assigned_to} onChange={handleChange} required>
                   <option value="">Pilih</option>
                   {users.map((u) => (
