@@ -5,9 +5,9 @@ import DisposalsTable from "../components/tables/DisposalsTable";
 
 function PenghapusanAset() {
   const role = JSON.parse(localStorage.getItem("user"))?.role;
-    if (!["admin", "asset_manager", "auditor"].includes(role)) {
-      return <div className="text-danger">Anda tidak memiliki akses ke halaman ini.</div>;
-    }
+  if (role === "staff") {
+    return <div className="text-danger">Anda tidak memiliki akses ke halaman ini.</div>;
+  }
 
   const [refreshTable, setRefreshTable] = useState(false);
 
