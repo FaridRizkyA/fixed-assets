@@ -70,58 +70,89 @@ Tabel Riwayat Aset
 
 ### 🏗️ Pengadaan Aset
 Input data aset dan upload file dokumen
+
 Otomatis insert data penyusutan tiap bulan berdasarkan tanggal perolehan
+
 Menampilkan daftar aset (available / in_use)
+
 Fitur search, filter berdasarkan tahun, edit (admin/asset_manager), dan cetak tabel
 
+
 Jenis penyusutan:
+
 Kendaraan Operasional: 5 tahun, Straight Line
+
 Peralatan Gudang: 4 tahun, Declining Balance
+
 Peralatan Kantor: 3 tahun, Straight Line
+
 Komputer & Elektronik: 3 tahun, Straight Line
+
 Alat Berat: 6 tahun, Declining Balance
+
 
 #### 📘 1. Straight Line Depreciation (Garis Lurus)
 ##### 🧮 Rumus:
 Penyusutan per tahun = Harga Perolehan − Nilai Residu / Umur Manfaat (tahun)
+
 Penyusutan per bulan = Penyusutan per tahun / 12
 
 #### 📘 2. Declining Balance Depreciation (Saldo Menurun)
 ##### 🧮 Rumus:
 Tarif Penyusutan = 2 / Umur Manfaat (tahun)
+
 Penyusutan per tahun = Nilai Buku × Tarif Penyusutan
+
 Penyusutan per bulan = Penyusutan per tahun / 12
 
 ### 🧾 Penempatan Aset
 Input penempatan aset → status aset jadi in_use
+
 Jika return date NULL, muncul tombol Kembalikan untuk mengisi return date & ubah status jadi available
+
+
 Fitur edit:
+
 Tidak bisa edit return date jika belum dikembalikan
+
 Bisa edit return date setelah dikembalikan
+
 Hapus data → otomatis ubah status aset ke available jika masih in_use
+
 Cetak tabel
 
 ### 🧮 Penyusutan Aset
 Tabel ringkasan penyusutan & riwayat penyusutan bulanan
+
 Penyusutan otomatis dihitung saat insert aset & saat bulan baru dimulai
+
 Fitur filter, search, dan cetak laporan
 
 ### 🗑️ Penghapusan Aset
 Input data penghapusan aset (soft delete)
+
 Ubah status aset menjadi disposal
+
 Jika tipe disposal = sale, isi nilai jual
+
 Menampilkan data aset yang dihapus
+
 Fitur edit, pulihkan aset, filter, search, cetak tabel
 
 ### 📂 Dokumen Aset
 Menampilkan semua dokumen aset
+
 Fitur: edit dokumen (tipe & file), buka file di tab baru
 
 ### 👤 Manajemen User
 Hanya bisa diakses oleh admin
+
 Fitur:
+
 Tambah user baru
+
 Edit password user
+
 Aktif / Nonaktifkan user
 
 ## 🔒 Hak Akses Tiap Role
@@ -134,7 +165,11 @@ Aktif / Nonaktifkan user
 | Penghapusan Aset |   ✅   |       ✅       |    ✅    |    ✅    |   ❌   |
 | Dokumen Aset     |   ✅   |       ✅       |    ❌    |    🔍   |   ❌   |
 | Manajemen User   |   ✅   |       ❌       |    ❌    |    ❌    |   ❌   |
+
 Keterangan:
+
 ✅ = akses penuh
+
 🔍 = hanya bisa lihat & cetak
+
 ❌ = tidak bisa akses sama sekali (navigasi disembunyikan)
