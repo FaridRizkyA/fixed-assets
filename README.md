@@ -45,16 +45,26 @@ node index.js
 ## 🧭 Struktur Halaman Aplikasi
 ### 📊 Dashboard
 4 Summary Card:
+
 Total Aset Aktif
+
 Total Nilai Aset
+
 Total Nilai Penyusutan
+
 Total Aset yang Dihapus
 
+
 4 Grafik:
+
 Pie Chart: Jumlah Kategori Aset
+
 Line Chart: Penyusutan Tiap Bulan
+
 Bar Chart: 3 Aset Nilai Tertinggi
+
 Donut Chart: Tipe Penghapusan Aset
+
 
 Tabel Riwayat Aset
 
