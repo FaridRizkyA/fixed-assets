@@ -100,7 +100,6 @@ function AssetForm({ onAssetAdded }) {
           document_type: item.document_type || "",
         }));
 
-        // hanya jika file ada
         if (item.document_file) {
           formData.append("documents", item.document_file);
         } else {

@@ -16,7 +16,7 @@ function PenempatanAset() {
       {(role === "admin" || role === "asset_manager") && (
         <Card className="shadow-sm mb-4">
           <Card.Body>
-            <h5 className="mb-3">Penempatan Aset</h5>
+            <h5 className="mb-3">Tempatkan Aset</h5>
             <AssignmentForm onAssigned={handleAssigned} />
           </Card.Body>
         </Card>
