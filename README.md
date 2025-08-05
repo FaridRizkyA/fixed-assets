@@ -8,7 +8,7 @@ Aplikasi dirancang untuk kebutuhan **PT Cipta Kargo**, perusahaan yang bergerak 
 ## 📘 Dependency yang digunakan
 
 ### Backend :
-- npm install express mysql2 dotenv cors multer morgan bcrypt multe
+- npm install express mysql2 dotenv cors multer morgan bcrypt
 
 ### Frontend :
 - npm install react-bootstrap bootstrap
