@@ -1,14 +1,22 @@
 # 📦 Fixed Assets Management System
 
-Proyek ini merupakan aplikasi manajemen aset tetap yang dikembangkan oleh:
-
-**Kelompok 1:**
-- Farid Rizk Amrullah  
-- Bintang Ilyasa Nugraha  
-- Lastri Arta Uli Pangaribuan
+Proyek ini merupakan aplikasi manajemen aset tetap yang dikembangkan oleh Farid Rizky Amrullah
 
 ## 🏢 Tema Proyek
 Aplikasi dirancang untuk kebutuhan **PT Cipta Kargo**, perusahaan yang bergerak di bidang **logistik dan distribusi**.
+
+## 📘 Dependency yang digunakan
+
+### Backend :
+- npm install express mysql2 dotenv cors multer morgan bcrypt
+
+### Frontend :
+- npm install react-bootstrap bootstrap
+- npm install react-router-dom
+- npm install chart.js react-chartjs-2
+- npm install react-icons --save
+- npm install react-data-table-component
+- npm install axios
 
 ## 🗄️ Database
 Nama database: **`fixed_assets_db`**  
