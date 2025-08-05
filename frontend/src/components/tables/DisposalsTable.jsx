@@ -20,7 +20,7 @@ function DisposalsTable({ refreshTrigger }) {
 
   const fetchDisposals = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/disposals");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/disposals");
       setDisposals(res.data);
     } catch (err) {
       console.error("Gagal mengambil data disposals:", err);
@@ -31,7 +31,7 @@ function DisposalsTable({ refreshTrigger }) {
     const confirm = window.confirm("Pulihkan aset ini?");
     if (!confirm) return;
     try {
-      await axios.delete(`http://localhost:5000/api/disposals/${id}`);
+      await axios.delete(import.meta.env.VITE_API_URL + `/api/disposals/${id}`);
       alert("Aset berhasil dipulihkan.");
       fetchDisposals();
     } catch (err) {

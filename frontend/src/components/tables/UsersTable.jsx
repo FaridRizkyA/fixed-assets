@@ -51,7 +51,7 @@ function UsersTable() {
     if (!window.confirm("Nonaktifkan pengguna ini?")) return;
 
     try {
-      await axios.patch(`http://localhost:5000/api/users/deactivate/${userId}`);
+      await axios.patch(import.meta.env.VITE_API_URL + `/api/users/deactivate/${userId}`);
       alert("Pengguna berhasil dinonaktifkan.");
       fetchUsers();
     } catch (err) {
@@ -63,7 +63,7 @@ function UsersTable() {
     if (!window.confirm("Pulihkan pengguna ini?")) return;
 
     try {
-      await axios.patch(`http://localhost:5000/api/users/restore/${userId}`);
+      await axios.patch(import.meta.env.VITE_API_URL + `/api/users/restore/${userId}`);
       alert("Pengguna berhasil dipulihkan.");
       fetchUsers();
     } catch (err) {

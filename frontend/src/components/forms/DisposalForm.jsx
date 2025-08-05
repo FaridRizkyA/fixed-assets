@@ -18,7 +18,7 @@ function DisposalForm({ onDisposalSubmitted }) {
 
   const fetchAvailableAssets = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/assets");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/assets");
       setAssets(res.data.filter(item => item.status !== "disposal"));
     } catch (err) {
       console.error("Gagal mengambil aset:", err);
@@ -47,7 +47,7 @@ function DisposalForm({ onDisposalSubmitted }) {
         created_by,
       };
 
-      const res = await axios.post("http://localhost:5000/api/disposals", payload);
+      const res = await axios.post(import.meta.env.VITE_API_URL + "/api/disposals", payload);
 
       if (res.status === 201) {
         alert("Penghapusan aset berhasil.");

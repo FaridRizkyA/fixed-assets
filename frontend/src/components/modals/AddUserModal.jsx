@@ -34,7 +34,7 @@ function AddUserModal({ show, onClose, onUserAdded }) {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/api/users/register", {
+      await axios.post(import.meta.env.VITE_API_URL + "/api/users/register", {
         username: form.username,
         email: form.email,
         password: form.password,

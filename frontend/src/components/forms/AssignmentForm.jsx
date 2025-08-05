@@ -20,7 +20,7 @@ function AssignmentForm({ onAssigned }) {
 
   const fetchAssets = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/assets");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/assets");
       const filtered = res.data.filter((item) => item.status === "available");
       setAvailableAssets(filtered);
     } catch (err) {
@@ -30,7 +30,7 @@ function AssignmentForm({ onAssigned }) {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/users");
       setUsers(res.data);
     } catch (err) {
       console.error("Gagal mengambil user:", err);
@@ -55,7 +55,7 @@ function AssignmentForm({ onAssigned }) {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-          const res = await axios.post("http://localhost:5000/api/assignments", form);
+          const res = await axios.post(import.meta.env.VITE_API_URL + "/api/assignments", form);
 
           if (res.status === 201) {
             alert("Penempatan aset berhasil.");

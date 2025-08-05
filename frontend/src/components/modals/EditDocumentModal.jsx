@@ -18,7 +18,7 @@ function EditDocumentModal({ show, onHide, document, onUpdated }) {
     formData.append("file", file);
 
     try {
-      await axios.put(`http://localhost:5000/api/documents/${document.document_id}`, formData);
+      await axios.put(import.meta.env.VITE_API_URL + `/api/documents/${document.document_id}`, formData);
       alert("Dokumen berhasil diperbarui.");
       onUpdated();
       onHide();

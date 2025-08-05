@@ -32,7 +32,7 @@ function AssetForm({ onAssetAdded }) {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await axios.get("http://localhost:5000/api/assets/categories");
+        const res = await axios.get(import.meta.env.VITE_API_URL + "/api/assets/categories");
         setCategories(res.data);
       } catch (err) {
         console.error("Gagal mengambil kategori:", err);

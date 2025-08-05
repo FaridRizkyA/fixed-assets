@@ -20,7 +20,7 @@ function EditUserModal({ show, onClose, user, onUpdated }) {
     }
 
     try {
-      await axios.patch(`http://localhost:5000/api/users/password/${user.user_id}`, {
+      await axios.patch(import.meta.env.VITE_API_URL + `/api/users/password/${user.user_id}`, {
         password,
       });
       alert("Password berhasil diperbarui.");

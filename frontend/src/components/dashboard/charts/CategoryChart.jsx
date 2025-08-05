@@ -32,7 +32,7 @@ function CategoryChart() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("http://localhost:5000/api/charts/category-chart");
+        const res = await axios.get(import.meta.env.VITE_API_URL + "/api/charts/category-chart");
         const labels = res.data.map(item => item.category_name);
         const values = res.data.map(item => item.total);
         setChartData(prev => ({

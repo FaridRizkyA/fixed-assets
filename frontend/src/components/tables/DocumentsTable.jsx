@@ -15,7 +15,7 @@ function DocumentsTable() {
 
   const fetchDocuments = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/documents");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/documents");
       setDocuments(res.data);
     } catch (err) {
       console.error("Gagal mengambil data dokumen:", err);
@@ -33,7 +33,7 @@ function DocumentsTable() {
   };
 
   const handleView = (path) => {
-    const url = `http://localhost:5000${path}`;
+    const url = import.meta.env.VITE_API_URL + `${path}`;
     window.open(url, "_blank");
   };
 

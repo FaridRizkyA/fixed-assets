@@ -15,7 +15,7 @@ function DepreciationsTable({ refreshTrigger }) {
 
   const fetchSummary = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/depreciations/summary");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/depreciations/summary");
       setData(res.data);
     } catch (err) {
       console.error("Gagal mengambil ringkasan penyusutan:", err);

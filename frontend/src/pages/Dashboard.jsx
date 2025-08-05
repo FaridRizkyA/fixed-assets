@@ -19,7 +19,7 @@ function Dashboard() {
   useEffect(() => {
     async function fetchSummary() {
       try {
-        const res = await axios.get("http://localhost:5000/api/summary");
+        const res = await axios.get(import.meta.env.VITE_API_URL + "/api/summary");
         setSummary(res.data);
       } catch (err) {
         console.error("Gagal mengambil data summary:", err);

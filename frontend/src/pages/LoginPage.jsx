@@ -12,7 +12,7 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/login', { username, password });
+      const res = await axios.post(import.meta.env.VITE_API_URL + '/api/login', { username, password });
       const user = res.data.user;
       localStorage.setItem('user', JSON.stringify(user));
       navigate('/dashboard');

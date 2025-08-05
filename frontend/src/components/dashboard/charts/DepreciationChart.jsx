@@ -28,7 +28,7 @@ function DepreciationChart() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("http://localhost:5000/api/charts/depreciation-chart");
+        const res = await axios.get(import.meta.env.VITE_API_URL + "/api/charts/depreciation-chart");
 
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
         const labels = res.data.map(item => {

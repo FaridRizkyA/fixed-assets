@@ -25,7 +25,7 @@ function AssetsTable({ refreshTrigger }) {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/assets");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/assets");
       setData(res.data);
     } catch (err) {
       console.error("Gagal mengambil data aset:", err);
@@ -34,7 +34,7 @@ function AssetsTable({ refreshTrigger }) {
 
   const fetchOldestYear = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/assets/oldest-year");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/assets/oldest-year");
       const oldest = res.data.oldest || new Date().getFullYear();
       const current = new Date().getFullYear();
       const options = [];

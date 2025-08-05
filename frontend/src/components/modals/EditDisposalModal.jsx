@@ -28,7 +28,7 @@ function EditDisposalModal({ show, onHide, data, onUpdated }) {
 
   const handleSubmit = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/disposals/${data.disposal_id}`, form);
+      await axios.put(import.meta.env.VITE_API_URL + `/api/disposals/${data.disposal_id}`, form);
       alert("Data penghapusan berhasil diperbarui.");
       onUpdated();
       onHide();

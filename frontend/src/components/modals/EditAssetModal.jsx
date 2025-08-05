@@ -22,7 +22,7 @@ function EditAssetModal({ show, onHide, asset, onUpdated }) {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await axios.get("http://localhost:5000/api/assets/categories");
+        const res = await axios.get(import.meta.env.VITE_API_URL + "/api/assets/categories");
         setCategories(res.data);
       } catch (err) {
         console.error("Gagal mengambil kategori:", err);
@@ -40,7 +40,7 @@ function EditAssetModal({ show, onHide, asset, onUpdated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`http://localhost:5000/api/assets/${asset.asset_id}`, form);
+      const res = await axios.put(import.meta.env.VITE_API_URL + `/api/assets/${asset.asset_id}`, form);
 
       if (res.status === 200) {
         alert("Aset berhasil diperbarui.");

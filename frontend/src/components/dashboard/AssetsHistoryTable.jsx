@@ -29,7 +29,7 @@ function AssetsHistoryTable() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("http://localhost:5000/api/history");
+        const res = await axios.get(import.meta.env.VITE_API_URL + "/api/history");
         setAssets(res.data);
       } catch (err) {
         console.error("Gagal mengambil riwayat aset:", err);

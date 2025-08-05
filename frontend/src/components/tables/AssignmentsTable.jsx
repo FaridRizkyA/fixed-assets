@@ -21,7 +21,7 @@ function AssignmentsTable({ refreshTrigger }) {
 
   const fetchAssignments = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/assignments");
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/api/assignments");
       setAssignments(res.data);
     } catch (err) {
       console.error("Gagal mengambil data penempatan:", err);
@@ -33,7 +33,7 @@ function AssignmentsTable({ refreshTrigger }) {
     if (!confirm) return;
 
     try {
-      await axios.put(`http://localhost:5000/api/assignments/return/${assignmentId}`);
+      await axios.put(import.meta.env.VITE_API_URL + `/api/assignments/return/${assignmentId}`);
       alert("Aset berhasil dikembalikan.");
       fetchAssignments();
     } catch (err) {
@@ -59,7 +59,7 @@ function AssignmentsTable({ refreshTrigger }) {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/assignments/${id}`);
+      await axios.delete(import.meta.env.VITE_API_URL + `/api/assignments/${id}`);
       alert("Penempatan berhasil dihapus.");
       fetchAssignments();
     } catch (err) {

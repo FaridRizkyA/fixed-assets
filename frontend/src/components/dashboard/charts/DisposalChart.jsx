@@ -17,7 +17,7 @@ function DisposalChart() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("http://localhost:5000/api/charts/disposal-chart");
+        const res = await axios.get(import.meta.env.VITE_API_URL + "/api/charts/disposal-chart");
         const labels = res.data.map(item => item.type || "Tidak Diketahui");
         const values = res.data.map(item => item.total);
         setData(prev => ({

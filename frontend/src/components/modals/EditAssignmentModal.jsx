@@ -22,8 +22,8 @@ function EditAssignmentModal({ show, onHide, assignment, onUpdated }) {
     async function fetchData() {
       try {
         const [userRes, assetRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/users"),
-          axios.get("http://localhost:5000/api/assets"),
+          axios.get(import.meta.env.VITE_API_URL + "/api/users"),
+          axios.get(import.meta.env.VITE_API_URL + "/api/assets"),
         ]);
 
         setUsers(userRes.data);
@@ -65,7 +65,7 @@ function EditAssignmentModal({ show, onHide, assignment, onUpdated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`http://localhost:5000/api/assignments/${assignment.assignment_id}`, form);
+      const res = await axios.put(import.meta.env.VITE_API_URL + `/api/assignments/${assignment.assignment_id}`, form);
 
       if (res.status === 200) {
         alert("Penempatan berhasil diperbarui.");
