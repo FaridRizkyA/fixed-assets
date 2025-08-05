@@ -1,11 +1,6 @@
 # 📦 Fixed Assets Management System
 
-Proyek ini merupakan aplikasi manajemen aset tetap yang dikembangkan oleh:
-
-**Kelompok 1:**
-- Farid Rizk Amrullah  
-- Bintang Ilyasa Nugraha  
-- Lastri Arta Uli Pangaribuan
+Proyek ini merupakan aplikasi manajemen aset tetap yang dikembangkan oleh Farid Rizky Amrullah
 
 ## 🏢 Tema Proyek
 Aplikasi dirancang untuk kebutuhan **PT Cipta Kargo**, perusahaan yang bergerak di bidang **logistik dan distribusi**.
